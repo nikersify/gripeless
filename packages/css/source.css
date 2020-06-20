@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Global --- */
+html {
+	@apply h-full text-gray-900 font-base;
+}
+
+body {
+	@apply min-h-full;
+}
+
+input, button {
+	/* @apply outline-none; */
+	outline: none !important;
+}
+
+input:focus, button:focus {
+	@apply shadow-outline;
+}
+
+/* --- Spin --- */
+.spin {
+	animation: 0.25s spin infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* --- Fades --- */
+@each $opacity in 75, 100 {
+	.fade-transition-$(opacity) {
+		animation: 0.5s cubic-bezier(0.445,  0.050, 0.550, 0.950) fade-out-$(opacity) forwards;
+	}
+
+	.fade-transition-$(opacity).active {
+		animation-timing-function: cubic-bezier(0.445,  0.050, 0.550, 0.950);
+		animation-name: fade-in-$(opacity);
+	}
+
+	@keyframes fade-in-$(opacity) {
+		0% { opacity: 0; }
+		40% { opacity: calc($(opacity)/100); }
+		100% { opacity: calc($(opacity)/100); }
+	}
+
+	@keyframes fade-out-$(opacity) {
+		0% { opacity: calc($(opacity)/100); }
+		40% { opacity: 0; }
+		100% { opacity: 0; }
+	}
+}
+
+/* --- Shift --- */
+.shift-transition {
+	animation: 0.5s cubic-bezier(0.445,  0.050, 0.550, 0.950) shift-out forwards;
+}
+
+.shift-transition.active {
+	animation-timing-function: cubic-bezier(0.445,  0.050, 0.550, 0.950);
+	animation-name: shift-in;
+}
+
+@keyframes shift-in {
+	0% { transform: translateY(0.75rem); }
+	40% { transform: translateY(0); }
+	100% { transform: translateY(0); }
+}
+
+@keyframes shift-out {
+	0% { transform: translateY(0); }
+	40% { transform: translateY(0.75rem); }
+	100% { transform: translateY(0.75rem); }
+}
+
+/* --- Code --- */
+code .dim {
+	@apply text-gray-500;
+}
+
+code .keyword {
+	@apply font-bold;
+}
+
+code .highlight {
+	@apply font-semibold text-red-600;
+}
+
+.content h1 {
+	@apply mb-2 text-3xl font-bold;
+}
+
+.content h2 {
+	@apply mb-1 text-xl font-semibold;
+}
+
+.content h3 {
+	@apply mb-1 text-lg font-medium;
+}
+
+.content h4 {
+	@apply mb-1 text-lg;
+}
+
+.content a {
+	@apply text-teal-600;
+}
+
+.content a:hover {
+	@apply text-teal-800;
+}
+
+.content blockquote {
+	@apply py-2 italic;
+}
+
+.content em {}
+
+.content p {
+	@apply mb-2;
+}
+
+.content strong {
+	@apply font-bold;
+}
+
+.content li {
+	@apply pl-1 mb-1;
+}
+
+.content ol {
+	@apply ml-8 list-decimal;
+}
+.content ul {
+	@apply ml-8 list-disc;
+}

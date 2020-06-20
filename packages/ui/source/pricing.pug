@@ -1,0 +1,193 @@
+extends _base
+
+include _index
+
+block head
+	title Pricing | Gripeless — Encourage complaining
+	+landing-head
+	+display-font
+
+mixin feature-row(label)
+	.py-3.border-t.border-b.w-full.flex.-mb-px.items-center
+		.inline-block.font-medium.text-gray-700.text-center.whitespace-wrap(class="w-1/2")
+			= label
+		.inline-block.font-bold.text-center(class="w-1/2")
+			block
+
+mixin yes
+	.text-red-600 ✓
+
+mixin no
+	.text-gray-500 ✗
+
+block body
+	.font-display
+		.mb-16
+			+nav
+
+		h1.text-3xl.font-bold.text-center.mb-8 Pricing
+		.mx-4: .flex.justify-center.flex-wrap
+			.max-w-sm.w-full.bg-gray-100.shadow-2xl.rounded-lg.p-4.border.mb-16.mx-2
+				h2.font-bold.text-center.text-xl.mb-2 Free
+				p.text-center.text-gray-700.mb-4.max-w-xs.mx-auto
+					| Everything you need to get started
+				.mx-auto.mb-4.px-4
+					+feature-row('Dashboard'): +yes
+					+feature-row('Javascript SDK'): +yes
+					+feature-row('Screenshots') Unlimited
+					+feature-row('Notifications') Mail only
+
+				.text-center.flex.items-center.justify-center.mb-2
+					span.text-2xl.font-semibold Free
+
+				p.text-gray-700.text-sm.text-center.mb-4
+					span.max-w-xs.inline-block The features in this plan will forever be free. Free plan includes everything that you need to judge whether Gripeless is a right fit for you.
+
+				.text-center
+					+create-project-btn
+
+			.max-w-sm.w-full.bg-white.shadow-2xl.rounded-lg.p-4.mb-16.mx-2.border-red-600.border-2
+				.-mx-4.-mt-4.text-center.font-black.text-sm.bg-red-600.px-2.py-1.text-gray-100.rounded-t-md.border-red-700.mb-4 Most popular
+				h2.font-bold.text-center.text-xl.mb-2 Lite
+				p.text-center.text-gray-700.mb-4
+					| When things get too serious for free plan
+				p.text-sm.mb-2.text-center.font-bold Everything in Free, plus:
+				.mx-auto.mb-4.px-4
+					+feature-row('Notifications'): +yes
+					+feature-row('Support') Priority
+
+				.text-center.flex.items-center.justify-center
+					span.text-2xl $
+					span.font-bold.text-3xl.tracking-tighter 9
+					span.tracking-tight.font-base.text-2xl /month
+
+				p.text-gray-700.text-sm.text-center.mb-4
+					a.text-red-800(href="mailto:support@usegripeless.com?subject=%5BBilling%5D%20Longer%20billing%20periods")
+						| Contact us
+					|  for longer billing periods.
+
+				.text-center
+					+create-project-btn
+
+			.max-w-sm.w-full.bg-gray-100.shadow-2xl.rounded-lg.p-4.border.mb-16.mx-2
+				h2.font-bold.text-center.text-xl.mb-2 Growth
+				p.text-center.text-gray-700.mb-4.mx-8
+					| Make Gripeless an integral part of your development
+				p.text-sm.mb-2.text-center.font-bold Everything in Lite, plus:
+				.mx-auto.mb-4.px-4
+					+feature-row('Deep integrations'): +yes
+					+feature-row('Remove branding'): +yes
+
+				.text-center.flex.items-center.justify-center
+					span.text-2xl $
+					span.font-bold.text-3xl.tracking-tighter 39
+					span.tracking-tight.font-base.text-2xl /month
+
+				p.text-gray-700.text-sm.text-center.mb-4
+					a.text-red-800(href="mailto:support@usegripeless.com?subject=%5BBilling%5D%20Longer%20billing%20periods")
+						| Contact us
+					|  for longer billing periods.
+
+				.text-center
+					+create-project-btn
+
+		.mx-4: .bg-gray-100.mx-auto.max-w-xl.p-4.shadow-xl.border.rounded-lg.mb-16
+			p.font-bold.mb-2.text-xl Have an open-source project?
+			p As a way to give back to the open-source community we're providing a full, unlimited version of Gripeless for free to open-source projects.
+			p
+				| If you have an open-source and non-commercial project, please 
+				a.text-red-800(href="mailto:support@usegripeless.com?subject=Open%20source%20project") contact us!
+		mixin faq(title)
+			.mb-4
+				h2.text-2xl.font-semibold.mb-2= title
+				block
+
+		.mx-4.mb-32: .max-w-3xl.mx-auto
+			h1.text-3xl.font-bold.text-center.mb-2 FAQ
+			p.text-center.mb-6 Missed your question? #[a.text-red-700(class="hover:text-red-900" href="mailto:support@usegripeless.com") Ask us directly].
+			+faq('How can Gripeless make my product more reliable?')
+				p.
+					Gripeless aims to quickly find any issue that arise when
+					you release new version of your product, update
+					dependencies, or add a possibly unreliable third party
+					provider. Users can quickly report those issues to you
+					where so you don't have to wait till someone finally sends
+					you an email telling you that stuff is broken.
+
+			+faq('What kind of gripes can I expect to get?')
+				p.
+					Broken links, broken buttons, unusuable UX issues like
+					content overflows on certain devices, problems with flows,
+					integrations not being reliable, gripes with anything about
+					UX (say user feels like something could work nicer for
+					them), pretty much anything that they see and think: "that
+					looks pretty broken".
+
+			+faq('Why wouldn\'t I just code this up myself?')
+				p.
+					Time is valuable. We make sure that the issues always get
+					submitted, screenshots are accurate, and your users get
+					updated. We upkeep the deep integrations/notifications so
+					you can sleep peacefully without worrying that your issue
+					reporting software has an issue. That would be pretty bad.
+
+			+faq('Why not simply use a solution like Sentry or Rollbar?')
+				p.
+					Error tracking software is great, we've personally used
+					Sentry in a couple projects and the experience has been
+					really nice. Gripeless is aimed at users to report issues
+					that traditional error trackers won't catch - things like
+					incorrect outputs, slow loading speeds or janky UX that
+					won't throw errors anywhere in your code, but only a real
+					user will notice that something's wrong.
+
+			+faq('Why not just use my support lines?')
+				p.
+					Imagine that you spot a nasty bug with your favourite app.
+					Would you go through the effort to open your slow email
+					client, spend time writing out a nice message, let alone
+					attaching a screenshot? You'll also need to attach info
+					about your browser, state of the app, etc. Despite seeing
+					many issues with products I like I've never done that,
+					which is why we've created the gripe reporting widget which
+					makes this process 10x easier for us and our users.
+
+			+faq('Why should we trust you?')
+				p.
+					We really like using reliable products, the more reliable
+					products are out there the happier we are. It feels really
+					satisfying to see our customers fix the gripes of their
+					users for some reason.
+
+			+faq('What is the difference between "Notifications" and "Deep integrations"?')
+				p.
+					Notifications means that you will receive, well,
+					notifications in e.g. Slack, text messages, webhooks, etc. with a link to the gripe on your Gripeless dashboard.
+					Deep integrations allow you to take this a step further and
+					have gripes be sent into your existing issue tracker, like
+					GitHub issues, Jira, Asana, etc.
+
+			+faq('I already use x, I don\'t want to bombard my users with more widgets!')
+				p Gripeless' activation button doesn't stay fixed on your site (unless you make it to yourself). Instead, it integrates seamlessly into the look of your website - #[a.text-red-700(class="hover:text-red-900" href='/docs#Goal') we've created a few examples] to show how Gripeless can be installed without making your site look crowded.
+
+			+faq('Can you make me a custom x or customize the widget for me?')
+				p.
+					Likely! Message our support and we'll try to work something
+					out.
+
+			+faq('Why can I not see the screenshot button sometimes?')
+				p.
+					The screenshots feature is supported only on Blink and
+					Gecko based browsers (e.g. Chrome, Opera, Firefox, combines
+					to ~85% market share). Also, the screenshots currently
+					don't work on mobile due to the screenshots UI only being
+					optimized for mouse use, but this might change in the
+					future.
+
+		.mb-32
+			+features
+
+		+foot
+
+
+	+landing-script

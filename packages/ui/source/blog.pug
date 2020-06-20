@@ -1,0 +1,25 @@
+extends _base
+
+include _index
+include blog/_meta
+
+block head
+	title Gripeless Blog
+	+display-font
+
+block body
+	.font-display
+		.mb-16
+			+nav
+
+		.mx-4.mb-16: .max-w-screen-sm.mx-auto
+			.mb-4
+				h1.text.text-3xl.font-bold Blog
+				div Stories about complaining.
+
+			+getting-more-complaints-preview
+			+negative-feedback-preview
+
+		+foot
+
+	+landing-script

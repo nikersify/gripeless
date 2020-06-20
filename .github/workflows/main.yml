@@ -1,0 +1,32 @@
+name: Flynn push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # Flynn requires all history to be pushed
+    - name: Install Flynn CLI
+      run: L=flynn && curl -sSL -A "`uname -sp`" https://dl.flynn.io/cli | zcat >$L && chmod +x $L
+    - name: Add Gripeless cluster
+      run: ./flynn cluster add -p ${{ secrets.FLYNN_TLS_PIN }} default ${{ secrets.FLYNN_CLUSTER_DOMAIN }} ${{ secrets.FLYNN_CONTROLLER_KEY }}
+    - name: Push to Flynn
+      run: |
+        git remote add flynn https://git.cluster.usegripeless.com/gripeless.git
+        git push flynn
+    - name: Run migrations
+      run: ./flynn run PORT=6969 yarn workspace @gripeless/api migrate
+    - name: Purge Cloudflare cache
+      run: |
+        curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+             -H "X-Auth-Email: ${{ secrets.CLOUDFLARE_AUTH_EMAIL}}" \
+             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_AUTH_TOKEN }}" \
+             -H "Content-Type: application/json" \
+             --data '{"purge_everything":true}'

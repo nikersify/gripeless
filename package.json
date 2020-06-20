@@ -1,0 +1,30 @@
+{
+	"private": true,
+	"workspaces": [
+		"packages/*",
+		".yalc/*",
+		".yalc/@*/*"
+	],
+	"importSort": {
+		".ts": {
+			"style": "module"
+		}
+	},
+	"devDependencies": {
+		"execa": "^4.0.0",
+		"import-sort-style-module": "^6.0.0",
+		"prettier": "^1.19.1",
+		"prettier-plugin-import-sort": "^0.0.3",
+		"ts-node": "^8.6.2",
+		"typescript": "^3.7.5"
+	},
+	"engines": {
+		"node": "12.x"
+	},
+	"scripts": {
+		"build": "NODE_ENV=production ts-node scripts/build/app",
+		"deploy": "ts-node scripts/assert-tree-clean && git push flynn",
+		"prepare:sdk": "NODE_ENV=production ts-node scripts/build/prepare-sdk",
+		"publish:sdk": "yarn prepare:sdk && HOSTNAME=usegripeless.com API_URL=https://api.usegripeless.com yarn workspace @gripeless/sdk publish"
+	}
+}

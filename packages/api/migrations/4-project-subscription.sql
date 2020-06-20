@@ -1,0 +1,11 @@
+-- If null
+	-- If it's less than 3 days from the creation of the project
+		-- Trial
+	-- If it's longer
+		-- Inactive
+-- If not null
+	-- If now is before valid
+		-- Active
+	-- If now is after valid
+		-- Inactive
+alter table projects add column subscriptionValidUntil timestamp;

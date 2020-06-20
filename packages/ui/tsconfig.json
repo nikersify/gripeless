@@ -1,0 +1,11 @@
+{
+	"include": ["source"],
+	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"strict": true,
+		"lib": ["esnext", "dom"]
+	}
+}

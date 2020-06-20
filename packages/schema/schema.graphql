@@ -1,0 +1,187 @@
+scalar PosixTime
+scalar GripeID
+scalar KeyValueString
+
+schema {
+	query: Query
+	mutation: Mutation
+}
+
+enum ProjectRole {
+	ADMIN
+	NONE
+}
+
+enum GripeStatus {
+	NEW
+	ACTIONABLE
+	DONE
+	DISCARDED
+}
+
+enum GripeAction {
+	DISCARD
+	RESTORE
+	COMPLETE
+}
+
+enum OnboardingStep {
+	ReportGripe #       report a gripe to yourself
+	TitleGripe #        title your gripe
+	TakeActionOnGripe # take action on gripe
+	SignIn #            sign in
+	Install #           install gripeless
+	HaveFun #           have fun
+	Done #              completed
+}
+
+type User {
+	uid: String!
+	email: String!
+	name: String
+	picture: String
+}
+
+enum Platform {
+	DESKTOP
+	MOBILE
+	TABLET
+	TV
+}
+
+type Device {
+	url: String
+	userAgent: String
+	viewportSize: String
+	browser: String
+	engine: String
+	os: String
+	platform: Platform
+}
+
+type GripeComment {
+	id: String!
+	body: String!
+	created: PosixTime!
+}
+
+interface GripeEvent {
+	created: PosixTime!
+}
+
+type GripeCreatedEvent implements GripeEvent {
+	created: PosixTime!
+}
+
+type GripeStatusUpdatedEvent implements GripeEvent {
+	created: PosixTime!
+	status: GripeAction!
+}
+
+type GripeTitleUpdatedEvent implements GripeEvent {
+	created: PosixTime!
+	title: String!
+}
+
+union GripeTimelineItem =
+	  GripeCreatedEvent
+	| GripeStatusUpdatedEvent
+	| GripeTitleUpdatedEvent
+	| GripeComment
+
+type Gripe {
+	id: GripeID!
+	status: GripeStatus!
+	title: String
+	body: String!
+	imagePath: String
+	context: [KeyValueString!]!
+	hasNotification: Boolean!
+	device: Device!
+	created: PosixTime!
+	updated: PosixTime
+	timeline: [GripeTimelineItem!]!
+}
+
+type FreePlan {
+	since: PosixTime!
+}
+
+type GrowthPlan {
+	since: PosixTime!
+	nextBilling: PosixTime!
+}
+
+union Plan = FreePlan | GrowthPlan
+
+type ModalAppearance {
+	hasBranding: Boolean!
+}
+
+type Project {
+	id: String!
+	name: String!
+	role: ProjectRole!
+	plan: Plan!
+	onboarding: OnboardingStep!
+	modalAppearance: ModalAppearance!
+}
+
+type CheckoutSession {
+	id: String!
+}
+
+input CreateGripeInput {
+	body: String!
+	context: [KeyValueString!]!
+	viewportSize: String
+	url: String
+	imageId: String
+	notifyEmail: String
+}
+
+type ProjectNameAvailability {
+	name: String!
+	isAvailable: Boolean!
+}
+
+type Query {
+	me: User!
+
+	isProjectNameAvailable(name: String!): ProjectNameAvailability!
+
+	project(name: String!): Project!
+	ownedProjects: [Project!]!
+
+	gripe(id: GripeID!): Gripe!
+
+	gripesCount(projectName: String!, status: GripeStatus): Int!
+
+	gripes(projectName: String!, status: GripeStatus): [Gripe!]!
+}
+
+type Mutation {
+	createProject(projectName: String!): Project!
+	claimProject(key: String!): Project!
+
+	createGripe(projectName: String!, gripe: CreateGripeInput!): Gripe!
+
+	updateGripeTitle(id: GripeID!, title: String!): Gripe!
+
+	createGripeComment(gripeId: GripeID!, body: String!): Gripe!
+
+	completeGripe(id: GripeID!): Gripe!
+	discardGripe(id: GripeID!): Gripe!
+	restoreGripe(id: GripeID!): Gripe!
+
+	createCheckoutSession(
+		projectName: String!
+		successUrl: String!
+		cancelUrl: String!
+	): CheckoutSession!
+
+	finishOnboarding(projectName: String!): Project!
+
+	subscribeToBlogMailingList(email: String!): String!
+	subscribeToReminderMailingList(email: String!): String!
+}

@@ -1,0 +1,355 @@
+extends ../_base
+
+include _meta
+include _post
+
+block head
+	+post-head('Negative feedback')
+
+block body
+	+post
+		+heading('Negative feedback', 'Maciej Łaszcz', '8 March 2020')
+
+		+section
+			+p.
+				It was an ordinary morning for me. I woke up, and then
+				immediately went on my phone to check email (very healthy, I
+				know). While browsing through new messages and still barely
+				having my eyes open, I saw this:
+
+			+gripe('- Anonymous')
+				+p You've got a new gripe!
+				+p.
+					"A simple text box should not cost $29/month. Also, you
+					misspelled your address (Heweliusza, not Heweljusza),
+					congratulations."
+
+			+p.
+				A notification that we've got a new complaint about the product
+				we're building, Gripeless. I couldn't really process it at
+				first - are they trying to attack us? Why would they be so
+				sarcastic?
+			+p.
+				To add to the fire I guessed it was submitted by a fellow
+				polish person, since they knew how to spell our address
+				correctly and even though this person has never interacted with
+				me or the product apart from looking at the landing page, they
+				had decided to write up this mean sounding message.
+
+			+p.
+				I shrugged it off, but there were only more coming:
+
+
+			+gripe('- Anonymous').
+				"button that intergates seamlessly... - intergates!!!"
+
+			+gripe('- Anonymous').
+				"Shouldn't a company that makes it easier to send complaints
+				make it's complaint button bigger?"
+
+			+gripe('- Anonymous').
+				"&lt;input type='text'&gt; as a service lol"
+
+			+p.
+				The amount of negativity in my mailbox was higher than average,
+				to say the least. I was confused where all those people were
+				coming from - our analytics mostly showed direct traffic so
+				perhaps we got featured by some email newsletter or something?
+
+			+p.
+				A few hours into the day I've randomly searched for
+				`usegripeless` on a popular search engine, only to discover the
+				following as one of the top results:
+
+			.font-semibold: +p
+				+a(href="https://www.reddit.com/r/programmingcirclejerk/comments/fbjrqf/input_typetext_as_a_service/")
+					| Gripeless got featured on a 150+ upvote /r/programmingcirclejerk thread
+				| .
+
+			+p.
+				As with most post on that subreddit, this one was no different
+				- it was packed full of hate and negativity, every comment
+				pointed out something wrong with our offering and did it in its
+				own unpleasant way. Some commenters were upset with the
+				pricing, some with the size of our Javascript's, some just
+				hated that a product like ours even is able to exist.
+
+			+p: span.font-bold.
+				And I consider that post to be one of the best things that
+				has ever happened to Gripeless to date.
+
+		+section
+			+h2 Extracting value from the complaints
+			+quote(
+				'"Manage Complaints To Enhance Loyalty" - John Goodman, 2006',
+				'https://www.researchgate.net/publication/237803364_Manage_Complaints_To_Enhance_Loyalty'
+			)
+				+p.
+					"Complaints, like death and taxes, are inevitable. Even
+					market leaders encounterthem. But each grievance represents
+					a chance to correct a flawed process, educate a customer
+					and strengthen loyalty."
+
+			+p
+				| Gripeless' tagline is literally 
+				span.italic "Grow your product with complaints" 
+				.
+					- getting so many people to complaint about our product
+					is exactly what we're striving to achieve as a company,
+					which is making complaining as easy as possible so that
+					both users and product developers benefit from them.
+
+			+p.
+				The thread contained so much useful information that we could
+				not be more thankful to everyone that had commented.
+
+			+p.
+				Presented below are a few examples of comments/gripes that we
+				thought were most helpful to us, along with the potential
+				problem that the OP had and the solution we took to resolve it.
+
+			+hr
+
+			+gripe(
+				'- Deleted user',
+				'https://www.reddit.com/r/programmingcirclejerk/comments/fbjrqf/input_typetext_as_a_service/'
+			) "&lt;input type="text"&gt; as a service"
+
+			+p This is the title of the OP. Let's dig into the sarcasm.
+
+			p: strong Potential problems:
+			+ul
+				li Product isn't complex enough
+				li Value is not demostrated well enough
+				li Price is too high ($29/month minimum without a free tier)
+
+			+p.
+				Gripeless is a complaint collecting solution - one of its
+				components is a Javascript SDK that on purpose shows only one
+				text field to the user.  While making the landing page we've
+				really focused on the &lt;input&gt; part of our product -
+				but there's a whole other side arguably more complex called the
+				dashboard, which wasn't shown almost at all.
+
+			+p.
+				The landing page is now adjusted to showcase both parts of
+				the product equally. The price also got a small tweak but
+				more on that later.
+
+			+hr
+
+			+gripe(
+				'- /u/revolynnub',
+				'https://www.reddit.com/r/programmingcirclejerk/comments/fbjrqf/input_typetext_as_a_service/fj6qklj/'
+			).
+				"[the Javascript SDK modal says] 'feel free to tell how
+				it makes you feel' - I see they target millennial soyboys
+				for their monetizations."
+
+			+p.
+				Hey, I'm almost a millenial myself so that almost seems
+				appropriate! They're referring to the default text we display on
+				the SDK next to the defamed &lt;input&gt; field the purpose of
+					which is to encourage the user further to submit their complaint.
+
+			p: strong Potential problems:
+			+ul
+				li
+					| The lead text is cringy (was 
+					span.italic.
+						"Submit an annoyance, an issue or a problem about our
+						product. Feel free to describe how it makes you feel as
+						well!"
+					| )
+			p: strong Conclusion:
+			+p
+				.
+					I completely agree that the text could be much improved.
+					We've changed the last sentence to 
+				span.italic "We can only fix problems we know about!" 
+				.
+					- which feels a little nicer and aligned better with the
+					philosophy of Gripeless. If it's not good enough I'm sure
+					we're gonna get a complaint or two about it and we'll just
+					keep iterating.
+
+			+hr
+
+			+gripe(
+				'- /u/yesdevnull',
+				'https://www.reddit.com/r/programmingcirclejerk/comments/fbjrqf/input_typetext_as_a_service/fj4q1pa/'
+			).
+				"[The SDK's size is 25kb gzipped]. What the fuck. That’s
+				a lot of JavaScript for one text field."
+
+			+p.
+				In a high school debate setting I would push back hard on this
+				- I'm obsessed with making things light and performant and I
+				think the size is already small enough and the load time is
+				very quick (I did write more about it in the first versions of
+				this post), but I actually don't think the underlying problem
+				of the complaint is really about the size of Javascript or load
+				times at all.
+
+			p: strong Potential problems:
+			+ul
+				li.
+					We've failed to demonstrate the full offering to yet
+					another person
+
+			p: strong Conclusion:
+			+p.
+				The bundle size is perfectly fine for the features & stability
+				we offer, the problem is again with not showing what else there
+				is to Gripeless apart from the text field - tldr functionality
+				demonstration bad. Landing page was adjusted to show more of
+				the product.
+
+			+hr
+
+			+gripe(
+				'- /u/duckbill_principate',
+				'https://www.reddit.com/r/programmingcirclejerk/comments/fbjrqf/input_typetext_as_a_service/fj5473x/'
+			)
+				+p [Quoting the landing page] "Based on scientific research"
+				+p.
+					Based on studies found in such luminary sources as Quality
+					Progress (hindex: 7), Strategic Direction (hindex: 10), and
+					Journal for Quality and Participation (hindex: 9). For
+					reference, hindexes cannot go below 0, and the top journal,
+					Nature, has an hindex of something like 370.
+
+				+p.
+					Which is sort of like comparing yourself to Einstein
+					because your middle school physics teacher wrote a smiley
+					face on your book report. Or more appropriately, saying you
+					contributed to the Linux kernel because you once sent an
+					email to LKML.
+
+			+p.
+				This comment is pretty funny - they're referring to some
+				citations that we've put on our landing page to hide the fact
+				that we didn't have any real testimonials at the time.
+
+			+p.
+				Basically, we've cited and linked to a bunch of studies that
+				supported the ideas behind Gripeless which was meant to
+				showcase potential users that the value they could get from our
+				product is a bit more proven.
+
+			p: strong Potential problems:
+			+ul
+				li Citations section looks like a joke to people that actually know about academics
+
+			p: strong Conclusions:
+			+p.
+				While the section has indeed served us well for a while, we
+				were never fully satisfied with it either. It's now gone and
+				replaced by more content about Gripeless itself and real
+				testimonials.
+
+			+hr
+			+p.
+				Notice how #[span.italic every single gripe] mentioned had a negative tone
+				behind it, yet also all of them contained a lot of value to be
+				extracted from.
+
+		+section
+			+h2 A story about pricing
+			+p.
+				A problem we've been noticing with our early leads is that
+				people are generally interested in the product, but only a
+				small percentage of them ever actually tries using it on their
+				website.
+
+			+p
+				.
+					This was largely caused because of our pricing structure -
+					we were only offering a single plan of $29/month for a full
+					set of features with a 7 day trial. After getting over 3k
+					unique users on our landing page
+
+				strong.
+					only 25 (&lt;1%!) of visitors ever created a project 
+				.
+					- which takes 10 seconds and you don't even have to sign up
+					to do it.
+
+			+p.
+				From our analytics we've also discovered that almost a third of
+				our new visitors actually visits the pricing page, and then
+				nearly all of them leave the site and never come back again.
+
+			+p
+				+a(href="https://news.ycombinator.com/item?id=22450596") As explained in a Hackernews comment by one of our users
+				.
+					, judging the value of products you've never used or heard
+					of before is very, very difficult. Our product offers a
+					Javascript SDK that users install on their websites -
+					despite the process being optimized as much as we could
+					make it to be, people didn't want to sign up because it was
+					only a 7 day trial.
+
+			+p
+				.
+					When you sign up for a trial for a product like Gripeless 
+				strong you automatically enter an agreement that you will have to take action when the trial ends
+				.
+					. The choice is of course either you continue using the
+					product after 7 days and pay or edit the source code of
+					your website again to uninstall it because Gripeless would
+					simply stop working and throw an error that there is no
+					subscription active. It's not like you can just stop using
+					the product, because 
+				strong.
+					your website would literally be broken after the
+					trial ended. 
+				| (or at least just the 
+				span.italic Report an issue 
+				| button but I still would consider that literally broken).
+
+			+p.
+				Because you can't work around the issues that all trials have
+				(and ours especially) we've decided to do the rational thing
+				and create an entirely free plan that's available forever
+				without a trial. We took all core functionality from the paid
+				offering and exposed it for everyone to use forever.
+
+			+p
+				strong.
+					This led to a dramatic increase in the amount of new
+					projects being created
+
+				.
+					(even by users referred from /r/programmingcirclejerk) and
+					subsequently trying out Gripeless - which I of course
+					consider a huge win. Without truly listening to and
+					dissecting the harsh complaints that weren't even about
+					pricing we would still be stuck trying to sell the product
+					to new users in the form of an obligation that they
+					#[span.italic have] to pay for.
+
+		+section
+			+h2 Takeaways
+			+p.
+				Listening even to the worst, most negative and meanest sounding
+				feedback can be very beneficial to the development of products.
+
+			+p.
+				When receiving a complaint try to dissociate yourself from any
+				potential personal attacks, never get upset at the
+				complainer, and instead focus on the surprising amount of
+				value that they're bringing you via their negative
+				emotions.
+
+			+p.
+				People that are driven by negative emotions will always be much
+				more honest to you about what they dislike than someone that
+				tries to be nice, and getting as much honest feedback as
+				possible is really important when developing a successful
+				product.
+
+	+related-posts
+		+getting-more-complaints-preview
+
+	+blog-footer

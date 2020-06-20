@@ -1,0 +1,20 @@
+extends _base
+
+include _index
+
+block head
+	title Terms & Privacy | Gripeless — Encourage complaining
+	+display-font
+
+block body
+	.font-display
+		.mb-16
+			+nav
+
+		.mx-4: .max-w-screen-lg.mx-auto.content.pb-16
+			.text-4xl.font-extrabold.mb-2 Legal
+			include:markdown-it(plugins=['markdown-it-anchor']) raw/policies.md
+
+		+foot
+
+	+landing-script

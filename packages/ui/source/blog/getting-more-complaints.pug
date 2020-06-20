@@ -1,0 +1,184 @@
+extends ../_base
+
+include _meta
+include _post
+
+block head
+	+post-head('Getting more complaints')
+
+block body
+	+post
+		+heading('Getting more complaints', 'Maciej Łaszcz', '8 March 2020')
+
+		+section
+			+p.
+				User complaints, customer gripes, personal grumbles, are very
+				beneficial to product's development process. By discovering
+				what users find annoying about your product you can easily
+				delight them by improving their workflow and fix the product
+				in ways that you wouldn't discover on your own.
+
+			+p.
+				Complaints don't have a good place in the modern SaaS world -
+				there are a lot of great real-time communication tools
+				available like Intercom or Drift and even more great email
+				support tools, but neither of these channels are optimized for
+				gathering complaints as there's way too much friction for users
+				to simply point out quick issues they might have with your
+				product (detailed reasons why are at the end of this
+				article).
+
+			+p
+				+a(href="/blog/negative-feedback") Getting a small public lynching of your product 
+				.
+					is one of the more interesting ways of collecting
+					complaints. Unfortunately even though product developers
+					could start creating such hate threads on their own
+					products I obviously wouldn't encourage it, instead we
+					propose a few simple practices that we've learned along
+					the way of building 
+				+a(href="/") Gripeless 
+				| that will help you get more complaints about your product.
+
+		+section
+			+h2 Make complaints solicited
+			+p.
+				The most important decision that a person makes before making a
+				complaint is to judge whether the service provider actually
+				#[span.italic wants] to receive any complaints.
+			+p.
+				Because most people by default don't think that service
+				providers are open to complaints you can very easily be missing
+				out on complaints and potential problems that could lead to the
+				person and others churning.
+
+			+p
+				.
+					Including a small note describing your desires for
+					feedback and complaints, how every bit of even the most
+					negative feedback is fine, or a message like
+				span.italic "We can only fix problems we know about" 
+				.
+					can go a very long way into making complaints feel
+					solicited.
+
+		+section
+			+h2 Make complaints easy
+			+p.
+				The sole fact that someone has to go out of their way and
+				make an effort to report issues about an app to a person they
+				don't even know can alone also be a big reason why people are
+				hesitant to do it.
+
+			+h3 Don't gate complaints behind email
+			+p
+				.
+					Email sets certain expectations on its users that they have to meet - since people sign emails with their real names it would be considered quite rude to just leave a message like 
+				span.italic "playlist button broken" 
+				.
+					even though that's all the complainer really wants to say.
+			+quote('- A complainer wasting time on writing boilerplate around a simple message')
+				+p "Hey,
+
+				+p.
+					Just wanted to report that the playlist save button
+					doesn't work some of the time. It breaks my workflow
+					quite a bit, hope that it gets fixed soon!
+
+				+p It's nothing big, but just wanted to let you know.
+
+				+p All the best,<br> My name"
+
+			+p.
+				All the things that go into a typical email are completely
+				unnecessary in the process of complaining, and because they
+				exist they could scare away some juicy complaints.
+
+			+h3 Don't gate complaints behind real-time chat
+			+p.
+				Okay, if writing a full email is too much, why wouldn't users
+				just use my real-time chat plugin that I have? They can write
+				much less to convey their message and still sound nice, this
+				must be a good solution? #[strong Wrong.]
+			+p.
+				Even though there's less letters involved, the same etiquette
+				reasons are maintained in the real time chat. This is because
+				both of those channels imply that you're going to have a
+				#[strong conversation with a real person].
+
+			+p
+				.
+					The structure of a complaint doesn't involve a
+					conversation - unless asking for more details. Most of
+					the time it's simply pointing out something that a person
+					disliked. 
+				strong.
+					People are less likely to admit what they don't like if
+					they're in a conversation
+				.
+					, compared to something like
+					submitting an anonymous ballot.
+
+			+quote('- A complainer again wasting time on writing boilerplate around a simple message in real-time chat').
+				"Hey [real person representing Company], just wanted to quickly
+				report that the playlist save button is broken and it's
+				breaking my workflow quite a bit. Nothing major but I hope it
+				gets fixed soon! Thanks!"
+
+			+p.
+				It's also quite inconvenient for users to point out several
+				of the gripes they might have with a product in a single
+				message, or multiple messages and their "niceness" must
+				increase with each gripe so that they don't seem rude - which
+				is completely unnecessary.
+
+			+h3 Do provide a simple complaint channel
+			+p.
+				Something like a simple text form that you embed on your site
+				is a great start to making your product complaint-focused. If
+				it's labeled well (use our tips above) it doesn't suffer from
+				the same etiquette problems as email or real-time chat
+				allowing users to quickly point out everything that they
+				dislike without being judged that they're doing so.
+
+			+quote('- A happy complainer that could finally express his problem with almost no effort').
+				"playlist save button is broken"
+
+			p Some other ideas include:
+			+ul
+				li Embedding "anonymous complaint" forms into your email conversatoins with customers
+				li Encouraging users to use your simple feedback form from time to time in a way that suits your product
+
+			+p.
+				It's important to ensure that any type of feedback is easy to
+				send and that it's always welcomed.
+
+		+section
+			+h2 Make complaints actionable
+			+p.
+				You could get every person in the world to complain about your
+				product, but the complaints will be useless until you actually
+				fix the problems that get pointed out.
+
+			+p.
+				While most of the time you won't need to talk to the complainer
+				at all, if something is not clear always follow-up to ask for
+				more details. The complainer will be delighted that you're
+				interested in improving the product specifically for them, and
+				it's also a good opportunity to learn more about how they use
+				your product.
+
+			+p
+				.
+					Also, don't get discouraged if you get a lot of negative
+					sounding complaints at first (
+				+a(href="/blog/negative-feedback") like when your product gets posted to /r/programmingcirclejerk
+				.
+					) - letting people be mean is
+					actually the key to more complaints and in turn, providing
+					a better service leading to more revenue.
+
+	+related-posts
+		+negative-feedback-preview
+
+	+blog-footer

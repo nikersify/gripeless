@@ -1,0 +1,10 @@
+{
+	"include": ["source"],
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"strict": true
+	}
+}

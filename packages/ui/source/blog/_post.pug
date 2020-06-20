@@ -1,0 +1,104 @@
+include ../_index
+
+mixin p
+	p.mb-2: block
+
+mixin a
+	a.text-red-700(
+		target="_blank" class="hover:text-red-900"
+	)&attributes(attributes): block
+
+mixin ul
+	ul.list-disc.ml-4.mb-2: block
+
+mixin a-muted
+	a.text-gray-700(
+		target="_blank" class="hover:text-gray-900"
+	)&attributes(attributes): block
+
+mixin hr
+	hr.my-8.border-gray-400
+
+mixin h1
+	h1.leading-tight.text-4xl.font-bold: block
+
+mixin h2
+	h2.mb-2.text-2xl.font-bold: block
+
+mixin h3
+	h3.mb-2.text-lg.font-bold: block
+
+mixin section
+	section.mb-8: block
+
+mixin gripe(source, sourceLink)
+	.my-4
+		.px-4.border-l-4.border-red-300.text-gray-600.italic.text-lg.bg-red-100.py-2
+			block
+
+		if source
+			.text-sm.text-right: +a-muted(href=sourceLink)= source
+
+mixin quote(source, sourceLink)
+	.my-4
+		.pl-4.border-l-4.border-teal-200.text-gray-600.italic.text-lg
+			block
+
+		if source
+			.text-sm.text-right
+				if sourceLink
+					+a-muted(href=sourceLink)= source
+				else
+					= source
+
+mixin heading(title, author, at)
+	.mb-8
+		+h1= title
+		.text-sm.font-display #{author} · #{at}
+
+mixin post-head(title)
+	title #{title} | Gripeless Blog
+	+display-font
+	+serif-font
+
+mixin post
+	.mx-4.mb-16: .max-w-screen-sm.mx-auto.font-serif
+		.py-24
+			.text-center.font-serif.italic
+				a(href="/blog" class="hover:text-gray-700") Gripeless Blog
+
+		.mb-16: block
+
+		.text-center.text-gray-400.select-none.text-sm.mb-8 ●
+
+		.flex.items-center.font-display.mb-16
+			.flex-none.mr-2
+				img.w-16.h-16.rounded-full.p-1(
+					src="/img/maciej-laszcz.png"
+					alt="Avatar"
+				)
+			.flex-none
+				.font-bold Maciej Łaszcz
+				div Developer, maker, founder of Gripeless
+				+a.mr-2(href="mailto:maciej@usegripeless.com") Mail
+				+a(href="https://github.com/nikersify") GitHub
+
+		.border.font-display.p-4.rounded-lg.text-center.bg-red-100.border-red-200
+			.mb-2
+				.text-xl.font-bold.mb-1.
+					Liked this post?
+
+				.w-96.mx-auto.
+					Leave your email to get notified of any new article
+					about complaining, product development or engineering.
+
+			.mailing-form-entry
+
+mixin blog-footer
+	.font-display: +foot
+	script(src="../ts/entries/blog.ts")
+
+mixin related-posts
+	.max-w-screen-sm.mx-auto.font-serif.mb-64
+		h1.text-lg.mb-2 Related posts:
+		block

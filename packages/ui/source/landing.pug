@@ -1,0 +1,324 @@
+extends _base
+
+include _index
+
+block head
+	title Gripeless — Encourage complaining
+	+landing-head
+	+display-font
+
+block body
+	-
+		const env = key => {
+			const value = process.env[key]
+
+			if (value === undefined) {
+				throw new Error(`process.env.${key} is not defined`)
+			}
+
+			return value
+		}
+
+	.font-display
+		.mb-8(class="lg:mb-16")
+			+nav
+
+		.relative
+			#shaky-messages.absolute.inset-0.opacity-50.overflow-hidden.hidden.z-0.pointer-events-none(class="lg:block")
+				style.
+					@keyframes shake {
+						from {
+							transform: rotate(1deg);
+						}
+
+						to {
+							transform: rotate(-1deg);
+						}
+					}
+
+					@keyframes mega-shake {
+						from {
+							transform: rotate(2deg);
+						}
+
+						to {
+							transform: rotate(-2deg);
+						}
+					}
+
+					@keyframes message-in {
+						from {
+							transform: scale(0.5);
+							opacity: 0;
+						}
+
+						40% {
+							transform: scale(1.1);
+							opacity: 1;
+						}
+
+						to {
+							transform: scale(1);
+						}
+					}
+
+					.shake:hover {
+						animation: message-in ease-out 0.5s;
+					}
+
+					.shake {
+						animation: shake infinite 0.125s alternate linear, message-in ease-out 0.5s;
+					}
+
+			.mb-16.px-4
+				.mx-auto.text-center.max-w-xl
+					.pt-8.mb-16(class="lg:mb-0")
+						h1.text-5xl.font-extrabold.textgray-800.leading-tight.mb-4.font-base
+							| Make sure your app 
+							br
+							| doesn't 
+							span.bg-red-500.px-1 break
+							| .
+						.max-w-md.mx-auto.mb-8
+							p.text-xl.mb-2 Keep moving fast and make your product reliable through user complaints with Gripeless.
+
+						.mb-8
+							+landing-cta
+
+						.border.p-3.max-w-sm.rounded-md.shadow-inner.bg-gray-100.mx-auto.text-left
+							.uppercase.text-xs.font-semibold.text-gray-600.tracking-widest Now introducing
+							.font-bold.text-lg Screenshots!
+							p Your users can now take screenshots of your website directly from Gripeless.
+
+			div.text-center.pb-32
+				.inline-block.text-gray-600.select-none
+					p.font-semibold Learn more
+					svg.mx-auto.inline-block.w-12.h-12.fill-current.text-gray-500.-mt-2(xmlns='http://www.w3.org/2000/svg', viewBox='0 0 24 24')
+						path(d='M15.3 9.3a1 1 0 011.4 1.4l-4 4a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4l3.3 3.29 3.3-3.3z')
+
+		#how-it-works.w-full.bg-teal-200.mb-64
+			.container.max-w-screen-lg.mx-auto.py-32
+				//- mixin step(index, title, picture)
+				//- 	.flex-1.text-left.p-6.text-center(class="lg:text-left")
+				//- 		div
+				//- 			.bg-white.rounded-lg.p-4.inline-flex.items-center.align-center.shadow-xl.h-48.w-64.mb-4
+				//- 				img.w-40.mx-auto.block(src=picture)
+				//- 		h2.text-2xl.mb-2.font-semibold
+				//- 			span.text-xl #{index}. 
+				//- 			| #{title}
+				//- 		.max-w-sm: block
+				mixin step(index)
+					- const isReverse = index % 2 === 0
+					.mb-16
+						.block.px-4(class="sm:hidden")
+							block
+
+						.hidden(class="sm:block")
+							.flex(class={'flex-row-reverse': isReverse, 'text-right': !isReverse}).items-center
+								block
+
+				mixin step-text(index, title)
+					.flex-1.mb-4(class="sm:mb-0")
+						.mx-8
+							.max-w-xs.inline-block
+								label.font-bold= `${index}.`
+								h3.text-3xl.font-bold.mb-2= title
+								block
+
+				mixin step-visual
+					.flex-1
+						.bg-white.rounded-lg.shadow-lg.h-64.text-left.flex.justify-center.items-center.px-4
+							block
+
+				mixin time-est(time)
+					div.inline-flex.items-stretch.text-sm.text-gray-700.shadow.rounded-lg.mx-auto.mb-2
+						.px-2.py-1.bg-teal-300.rounded-l-lg.flex.items-center
+							svg.inline-block.w-4.h-4(xmlns='http://www.w3.org/2000/svg', viewBox='0 0 24 24')
+								path(d='M12 22a10 10 0 110-20 10 10 0 010 20zm0-2a8 8 0 100-16 8 8 0 000 16zm1-8.41l2.54 2.53a1 1 0 01-1.42 1.42L11.3 12.7a1 1 0 01-.3-.7V8a1 1 0 012 0v3.59z')
+						.px-2.py-px.bg-teal-100.rounded-r-lg.inline-flex.items-center
+							= time
+
+				.mx-4
+					//- +step(1)
+						+step-text('Install Gripeless')
+							+time-est('2 minutes')
+							p.
+								Copy our code to add our lightweight widget
+								to your site.
+
+						+step-visual
+							pre.whitespace-pre.text-xs.text-gray-400.bg-gray-800.inline-block.p-4.rounded-lg.shadow
+								= '<script src='
+								span.font-bold.text-red-400 "//sdk.usegripeless.com"
+								= '></script>'
+								br
+								= "gripeless.modal("
+								span.font-bold.text-red-400 'project-name'
+								= ")"
+
+					+step(1)
+						+step-text(1, 'Users complain')
+							p.
+								Place a report an issue button on your site to
+								make reporting issues frictionless.
+
+						+step-visual
+							.shake "The add payment button #[span.text-red-600.font-bold doesn't work]"
+
+					+step(2)
+						+step-text(2, 'You fix the gripe')
+							p.
+								Use meta information to know why the issue is
+								happening.
+
+						+step-visual
+							.p-2.border.border-gray-600.w-96
+								h2.text-lg.font-semibold Untitled gripe
+								p "The add payment doesn't work"
+								p.text-red-600.font-bold.text-sm Screenshot attached
+								hr.border-gray-500.my-2
+								p.text-sm Firefox, macOS 10.15
+								p.text-sm 1366x768
+								p.text-sm https://your.app/billing
+								p.text-xs.text-gray-600 +more...
+
+					+step(3)
+						+step-text(3, 'They get notified')
+							p.
+								Automatically inform users when you fix their
+								issues, without leaving the issue tracker.
+
+						+step-visual
+							div
+								p.text-3xl.text-center ✉
+								.border.rounded-lg.px-4.py-2.max-w-sm.shadow.bg-white
+									p.font-bold Your gripe #[span.font-bold.text-red-700 has been fixed!]
+									p Hey, We're happy to inform that the gripe that you've submitted...
+
+		#the-modal.mx-4.mb-64
+			.max-w-screen-lg.mx-auto.flex.flex-col(class="sm:flex-row")
+				.flex-1
+					.max-w-sm.mb-8.text-center.mx-auto(class="sm:mb-0 sm:text-left sm:mx-0")
+						.text-3xl.font-bold.mb-2 The Modal
+						p.mb-2.
+							Optimized for complaints, the provided SDK lets your
+							users easily submit the gripes they have with your
+							product, #[strong without leaving your website].
+
+						p.mb-2.
+							Create the activation button that fits into your
+							website and hook it up to Gripeless with
+							#[strong 2 lines of code].
+
+						p.mb-2.
+							#[a.text-red-700(href="/docs" class="hover:text-red-900" target="_blank") Check out the docs!]
+				.flex-1
+					.max-w-sm.mx-auto(class="sm:max-w-full sm:mx-0")
+						.rounded-lg.border.shadow-2xl
+							.rounded-t-lg.py-1.px-2.bg-gray-200.flex.items-center.border-b.border-gray-200
+								.w-3.h-3.mr-1.bg-red-500.border-red-600.border.rounded-full
+								.w-3.h-3.mr-1.bg-yellow-500.border-yellow-600.border.rounded-full
+								.w-3.h-3.mr-1.bg-green-500.border-green-600.border.rounded-full
+
+							.p-2.bg-gray-300.text-sm.border-b.select-none.text-center
+								.bg-gray-100.text-gray-600.rounded-md.shadow.px-2.py-1.mx-auto
+									| https://your-website.com
+
+							.rounded-b-lg.bg-white
+								.bg-gray-100.shadow-2xl.h-48.flex.flex-col.items-center.justify-center.rounded-b-lg
+									button#demo-gripeless-button.px-4.py-2.border.font-medium.rounded.bg-white.shadow(class="hover:bg-red-600 hover:text-white hover:border-red-700")
+										| Problems with this page?
+									p.text-sm.text-gray-700.mt-2 Try me out!
+
+		#integrations.mx-4.mb-48
+			.max-w-screen-lg.mx-auto
+				mixin icons
+					.flex.flex-wrap.justify-center
+						block
+
+				mixin icon(src)
+					img.w-24.h-24.m-6(src=src)
+
+				.flex.mb-8
+					.flex-1.text-center.px-4.border-r
+						h4.font-bold.text-3xl.mb-2 Notifications
+						p.
+							Get notified about new gripes instantly, wherever
+							you want.
+						br
+
+						+icons
+							+icon('./img/brands/slack.png')
+							+icon('./img/brands/zapier.png')
+							+icon('./img/brands/discord.png')
+							+icon('./img/brands/webhook.png')
+							+icon('./img/brands/sms.png')
+							+icon('./img/brands/email.png')
+
+					.flex-1.text-center.px-4.border-l
+						h4.font-bold.text-3xl.mb-2 Deep integrations
+						p.
+							Have your gripes piped directly into your issue
+							tracking system. Users will get automatically
+							notified when you resolve them.
+
+						+icons
+							+icon('./img/brands/github.png')
+							+icon('./img/brands/trello.png')
+							+icon('./img/brands/jira.png')
+							+icon('./img/brands/gitlab.png')
+							+icon('./img/brands/asana.png')
+							+icon('./img/brands/basecamp.png')
+
+				p.text-center.text-sm.
+					We will work with you to optimize the given integrations
+					for your use case.
+
+		#pico.mx-4.mb-48
+			img.w-64.shadow-2xl.mx-auto.mb-8(src='./img/brands/pico.png')
+			.max-w-md.mx-auto.text-center
+				.font-bold.text-3xl.text-center.mb-2 The best screenshot tech yet
+				p.mb-2.
+					Gripeless ships with our one of its kind solution that
+					takes browser screenshots #[strong entirely client side].
+
+				p.mb-2.
+					This provides you with great #[strong accuracy] and
+					#[strong privacy] unlike other products that have a
+					screenshot functionality. It also works in Electron and
+					#[a.text-red-700(class="hover:text-red-900" href="//github.com/gripeless/pico" target="_blank") is open source]!
+
+		.mb-32
+			+features
+
+		.px-4.bg-teal-100.py-16: .mx-auto
+			.max-w-md.mx-auto.border-l-4.border-teal-300.pl-6
+				p.text-xl.leading-loose.mb-4
+					| "I didn't see the actual value until 
+					span.font-bold I caught 2 important gripes in the first 2 days 
+					| of installing Gripeless. I'm very pleased with the product so far."
+				a.flex.items-center.text-gray-700(
+					href="https://siftrics.com"
+					class="hover:text-gray-600"
+				)
+					span.h-10.w-10.p-2.rounded-full.inline-block.bg-gray-500.mr-2
+						img(src='/img/testimonials/siftrics.png')
+					| Thomas — siftrics.com
+
+		.mx-4: .container.mx-auto.py-32.text-center.relative
+			.mb-8.max-w-2xl.mx-auto
+				h2.text-4xl.font-bold.leading-snug.mb-4
+					| Eliminate blind spots when things break.
+				p.text-xl Help your stuff "just work", in just 2 lines of code.
+			+landing-cta
+
+		.mx-4.mb-24
+			.max-w-md.mx-auto.text-lg
+				h2.text-xl.font-bold.text-center.mb-2 Did you know...
+				p.text-center.mb-2.
+					...that only 4% of customers will complaint to the service
+					provider before churning, and without even saying a word?
+
+		+foot
+
+	+landing-script
